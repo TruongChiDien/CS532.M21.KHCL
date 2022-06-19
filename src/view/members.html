@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Danh sách thành viên</title>
+        <style>
+            .nav a:hover {
+                background-color: #ccc;
+            }
+        </style>
+    </head>
+    <body style="margin: 0">
+        <div style="border-bottom: 1px solid #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)">
+            <div style="display: flex; justify-content: space-between; padding: 10px 30px">
+                <a href="/" style="text-decoration: none">
+                    <div style="display: flex; align-items: center">
+                        <img src="/templates/assets/img/logo.png" alt="" style="height: 80px; width: 80px" />
+                        <div style="margin-left: 8px; font-weight: 1000; color: #0685d6; font-size: 24px; font-style: italic">
+                            <div>FACE</div>
+                            <div>MASK</div>
+                        </div>
+                    </div>
+                </a>
+                <div class="nav" style="display: flex; align-items: center">
+                    <a href="/" style="text-decoration: none; color: #000; padding: 10px 40px; font-size: 18px; border-radius: 10px; font-weight: 550">Trang chủ</a>
+                    <a style="text-decoration: none; color: #000; padding: 10px 40px; font-size: 18px; border-radius: 10px; font-weight: 550">Danh sách thành viên</a>
+                    <a href="/history" style="text-decoration: none; color: #000; padding: 10px 40px; font-size: 18px; border-radius: 10px; font-weight: 550">Lịch sử vi phạm</a>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 30px; display: flex; justify-content: center">
+            <div style="font-size: 24px; font-weight: 550; border-bottom: 2px solid #000; padding-bottom: 4px; color: #0685d6">DANH SÁCH THÀNH VIÊN</div>
+        </div>
+
+        <div style="padding: 20px 60px" id="list_members">
+            <div style="display: flex; justify-content: space-between; color: #3c9ede; font-weight: 550; border-bottom: 1.5px solid #ccc; padding-bottom: 8px; font-size: 18px; width: 100%">
+                <div style="width: 33.33%">Họ và tên</div>
+                <div style="flex: 1">Ngày sinh</div>
+                <div style="width: max-content">Giới tính</div>
+                <div></div>
+            </div>
+        </div>
+        <a
+            href="/add_member"
+            style="
+                position: fixed;
+                border: 1px solid #ccc;
+                border-radius: 20px;
+                padding: 10px 20px;
+                background-color: #0685d6;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                cursor: pointer;
+                right: 60px;
+                bottom: 70px;
+                text-decoration: none;
+            "
+        >
+            <div style="font-size: 50px; font-weight: 600; color: #fff">+</div>
+        </a>
+    </body>
+    <script>
+        fetch("http://127.0.0.1:8000/get_members")
+            .then((res) => res.text())
+            .then((html) => {
+                let history = document.getElementById("list_members");
+                history.innerHTML += `${html}`;
+            });
+    </script>
+</html>

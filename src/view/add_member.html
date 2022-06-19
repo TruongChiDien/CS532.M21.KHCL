@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Add People</title>
+    </head>
+    <body style="margin: 0">
+        <div style="border-bottom: 1px solid #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)">
+            <div style="display: flex; justify-content: space-between; padding: 10px 30px">
+                <a href="/" style="text-decoration: none">
+                    <div style="display: flex; align-items: center">
+                        <img src="/templates/assets/img/logo.png" alt="" style="height: 80px; width: 80px" />
+                        <div style="margin-left: 8px; font-weight: 1000; color: #0685d6; font-size: 24px; font-style: italic">
+                            <div>FACE</div>
+                            <div>MASK</div>
+                        </div>
+                    </div>
+                </a>
+                <div class="nav" style="display: flex; align-items: center">
+                    <a href="/" style="text-decoration: none; color: #000; padding: 10px 40px; font-size: 18px; border-radius: 10px; font-weight: 550">Trang chủ</a>
+                    <a href="/members" style="text-decoration: none; color: #000; padding: 10px 40px; font-size: 18px; border-radius: 10px; font-weight: 550">Danh sách thành viên</a>
+                    <a href="/history" style="text-decoration: none; color: #000; padding: 10px 40px; font-size: 18px; border-radius: 10px; font-weight: 550">Lịch sử vi phạm</a>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 30px; display: flex; justify-content: center">
+            <div style="font-size: 24px; font-weight: 550; border-bottom: 2px solid #000; padding-bottom: 4px; color: #0685d6">THÊM THÀNH VIÊN</div>
+        </div>
+        <div>
+            <form action="" style="width: 60%; margin: 20px auto 0">
+                <div>
+                    <div style="display: flex; justify-content: space-between">
+                        <div style="display: flex; flex-direction: column">
+                            <label for="name" style="font-weight: 600; margin-bottom: 4px; font-size: 18px">Họ và tên</label>
+                            <input type="text" name="name" id="name" placeholder="Nhập họ tên" style="padding: 5px 8px; width: 100%" />
+                        </div>
+                        <div style="display: flex; flex-direction: column">
+                            <label for="date" style="font-weight: 600; margin-bottom: 4px; font-size: 18px">Năm sinh</label>
+                            <input type="date" name="date" id="date" style="padding: 4px 8px; width: 100%" />
+                        </div>
+                        <div style="display: flex; flex-direction: column">
+                            <label for="sex" style="font-weight: 600; margin-bottom: 4px; font-size: 18px">Giới tính</label>
+                            <select name="sex" id="sex" style="padding: 5px 8px; width: 100%">
+                                <option value="">Giới tính</option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nu">Nu</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px; display: flex; justify-content: center">
+                        <img src="{{ url_for('add_member_feed') }}" style="width: 640px; height: 480px; object-fit: cover" />
+                    </div>
+                </div>
+                <div style="margin-top: 20px; display: flex; justify-content: center">
+                    <a  id="submit"
+                        href="/"
+                        style="
+                            border: 1px solid #ccc;
+                            padding: 10px 40px;
+                            background-color: #0685d6;
+                            border-radius: 10px;
+                            cursor: pointer;
+                            font-size: 16px;
+                            font-weight: 550;
+                            color: #fff;
+                            text-decoration: none;
+                        "
+                    >
+                        Thêm thành viên
+                    </a>
+                </div>
+            </form>
+        </div>
+    </body>
+    <script>
+        var btnSubmit = document.getElementById("submit");
+
+        btnSubmit.onclick = (e) => {
+            var name = document.getElementById("name").value;
+            var date = document.getElementById("date").value;
+            var sex = document.getElementById("sex").value;
+            var url = "http://127.0.0.1:8000/upload_member_info";
+            var d = new Date(date);
+            let year = d.getFullYear();
+            let month = d.getMonth()+1;
+            let day = d.getDate();
+            var newDate = `${day}/${month}/${year}`;
+
+            fetch(url, {
+                method: "POST",
+                body: JSON.stringify({
+                    name: name,
+                    birth: newDate,
+                    gender: sex,
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                },
+            })
+                .then((res) => res.text())
+                .then((data) => console.log(data));
+        };
+    </script>
+</html>
