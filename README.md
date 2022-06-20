@@ -14,5 +14,5 @@ pip install -r requirements.txt
 
 # Run code
 ```bash
-uvicorn controller:app
+python ./src/controller.py
 ```
