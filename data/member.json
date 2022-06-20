@@ -15,8 +15,13 @@
     "gender": "Nam"
   },
   {
-    "name": "Do Trong Khanh",
-    "birth": "1/5/2001",
+    "name": "Bui Tri Dung",
+    "birth": "16/10/2001",
+    "gender": "Nam"
+  },
+  {
+    "name": "Nguyen Anh Dung",
+    "birth": "24/4/2001",
     "gender": "Nam"
   }
 ]

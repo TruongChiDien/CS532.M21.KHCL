@@ -13,6 +13,7 @@ app.mount('/data', StaticFiles(directory='data'), name='data')
 
 templates = Jinja2Templates(directory='src/view')
 
+
 class Member(BaseModel):
     name: str
     birth: str
@@ -29,7 +30,7 @@ async def main(request: Request):
 
 @app.get('/home_feed', response_class=HTMLResponse)
 async def home_feed():
-    return StreamingResponse(home.gen_frames(1),
+    return StreamingResponse(home.gen_frames(0),
                     media_type='multipart/x-mixed-replace; boundary=frame')
 
 
@@ -50,7 +51,7 @@ async def add_member_template(request: Request):
 
 @app.get('/add_member_feed', response_class=HTMLResponse)
 def add_member_feed():
-    return StreamingResponse(add_member.add_member(1),
+    return StreamingResponse(add_member.add_member(0),
                     media_type='multipart/x-mixed-replace; boundary=frame')
 
 

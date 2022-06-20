@@ -1,7 +1,7 @@
 from model.common import *
 
 def train_face_reg(faces):
-    global fe, embeddings
+    global fe, embeddings, names
     left, front, right = faces
     left = torch.cat([trans(img).unsqueeze(0).to('cuda:0') for img in left[10:-10]])
     front = torch.cat([trans(img).unsqueeze(0).to('cuda:0') for img in front[10:-10]])
@@ -13,6 +13,7 @@ def train_face_reg(faces):
     
     # embeds = torch.load(DATA_PATH+'/facelist.pth')
     embeddings = torch.cat([embeddings, embed_left.to('cpu'), embed_front.to('cpu'), embed_right.to('cpu')])
+    
     torch.save(embeddings, 'data/facelist.pth')
 
 
